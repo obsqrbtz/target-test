@@ -21,15 +21,27 @@
         }
 
         // Task 2
+        public class Coin
+        {
+            public string Name { get; set; } = string.Empty;
+            public int Price { get; set; }
+        }
+
         public static Dictionary<string, int> CountCoins(double cents)
         {
-            Dictionary<string, int> coins = new()
-            {
-                {"Quarters", 0 },
-                {"Dimes", 0 },
-                {"Nickels", 0 },
-                {"Pennies", 0 }
+            List<Coin> coinPrices = new(){
+                new Coin { Name = "Quarter", Price = 25 },
+                new Coin { Name = "Dime", Price = 10 },
+                new Coin { Name = "Nickel", Price = 5 },
+                new Coin { Name = "Penny", Price = 1 }
             };
+
+            Dictionary<string, int> coins = new();
+
+            foreach (var coin in coinPrices)
+            {
+                coins.Add(coin.Name, 0);
+            }
 
             if (cents < 0)
             {
@@ -39,13 +51,11 @@
             cents = Math.Floor(cents);
             int coinsSum = 0;
 
-            coins["Quarters"] = (int)(cents / 25);
-            coinsSum += coins["Quarters"] * 25;
-            coins["Dimes"] = (int)((cents - coinsSum) / 10);
-            coinsSum += coins["Dimes"] * 10;
-            coins["Nickels"] = (int)((cents - coinsSum) / 5);
-            coinsSum += coins["Nickels"] * 5;
-            coins["Pennies"] = (int)(cents - coinsSum);
+            for (int i = 0; i < coinPrices.Count; i++)
+            {
+                coins[coinPrices[i].Name] = (int)((cents - coinsSum) / coinPrices[i].Price);
+                coinsSum += coins[coinPrices[i].Name] * coinPrices[i].Price;
+            }
 
             return coins;
         }
