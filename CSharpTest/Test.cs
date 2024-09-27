@@ -53,12 +53,11 @@
         // Task 3
         public static int MaximizeNumber(int num)
         {
-            string numStr = num.ToString();
             List<int> digits = new();
-            foreach (char c in numStr)
+            while (num > 0)
             {
-                _ = int.TryParse(c.ToString(), out int digit);
-                digits.Add(digit);
+                digits.Add(num % 10);
+                num /= 10;
             }
             digits = digits.OrderDescending().ToList();
             string resultStr = string.Join("", digits);
