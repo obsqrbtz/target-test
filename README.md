@@ -12,7 +12,7 @@ WHERE child.BrandID = parent.BrandID
 ## Задание 2
 
 ```SQL
-Select Brands.Name from Cars 
+SELECT Brands.Name from Cars 
 LEFT JOIN Brands on Cars.BrandID = Brands.ID
 GROUP by Brands.Name, brandid
 HAVING COUNT(Cars.id) > 3
@@ -21,7 +21,7 @@ HAVING COUNT(Cars.id) > 3
 ## Задание 3
 
 ```SQL
-Select Brands.Name, SUM(price) as SumPrice from Cars 
+SELECT Brands.Name, SUM(price) as SumPrice from Cars 
 LEFT JOIN Brands on Cars.BrandID = Brands.ID
 GROUP by Brands.Name, BrandID
 ```
@@ -29,7 +29,7 @@ GROUP by Brands.Name, BrandID
 ## Задание 4
 
 ```SQL
-Select TOP 2 Countries.Name, AVG(Pow) as AvgPow from Cars 
+SELECT TOP 2 Countries.Name, AVG(Pow) as AvgPow from Cars 
 LEFT JOIN Brands on Cars.BrandID = Brands.ID
 LEFT JOIN Countries on Brands.CountryID = Countries.ID
 GROUP BY Countries.Name
@@ -39,7 +39,7 @@ ORDER BY AvgPow DESC
 ## Задание 5
 
 ```SQL
-Select TOP 1 WITH TIES Cars.Name as Car, Brands.Name as Brand from Cars 
+SELECT TOP 1 WITH TIES Cars.Name as Car, Brands.Name as Brand from Cars 
 LEFT JOIN Brands on Cars.BrandID = Brands.ID
 GROUP by Brands.Name, Cars.Name, Price
 ORDER by ROW_NUMBER() OVER(PARTITION BY Brands.Name ORDER BY Price);
